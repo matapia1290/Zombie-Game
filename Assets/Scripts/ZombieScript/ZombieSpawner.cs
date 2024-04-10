@@ -12,11 +12,9 @@ public class ZombieSpawner : MonoBehaviour
     {
         for(int i = 0; i < maxZombie; i++) 
         {
-            GameObject newZombie = Instantiate(zombiePrefab, zombieSpawner[Random.Range(0, zombieSpawner.Length)].position,Quaternion.identity);
+            GameObject newZombie = Instantiate(zombiePrefab, zombieSpawner[i].position,Quaternion.identity);
         }
     }
-
-    // Update is called once per frame
     void Update()
     {
         nextRoundTimer+= Time.deltaTime;
@@ -27,10 +25,6 @@ public class ZombieSpawner : MonoBehaviour
             {
                 GameObject newZombie = Instantiate(zombiePrefab, zombieSpawner[i].position, Quaternion.identity);
             }
-            
         }
-
-        
-    }
-    
+    }  
 }

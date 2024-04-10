@@ -7,7 +7,8 @@ public class ZombieMovement : MonoBehaviour
 {
     public NavMeshAgent zombie;
     public Transform zombPos;
-    public int hit = 0;
+    private int hit = 0;
+    public int zombieHealth;
    // public Transform player;
     void Start()
     {
@@ -18,8 +19,8 @@ public class ZombieMovement : MonoBehaviour
     void Update()
     {
         zombie.SetDestination(GameObject.FindWithTag("Player").transform.position);
-
-        if (hit == 3) 
+   
+        if (hit == zombieHealth) 
         {
             Destroy(gameObject);
         }
