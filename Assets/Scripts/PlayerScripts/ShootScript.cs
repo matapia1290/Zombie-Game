@@ -13,7 +13,7 @@ public class ShootScript : MonoBehaviour
     //Ammo counts
     public int pistolMagCount;
     public int pistolMag;
-    public int pistolAmmo;
+    private int pistolAmmo;
     public float pistolReloadSpeed;
     private int arMag;
     private int arAmmo;
@@ -21,6 +21,7 @@ public class ShootScript : MonoBehaviour
     private float arReloadSpeed;
     //Reload bools
     public bool isReloading = false;
+    private float timer = 0;
     void Start()
     {
         pistolAmmo = pistolMag * pistolMagCount;
@@ -32,34 +33,39 @@ public class ShootScript : MonoBehaviour
     void SemiAuto()
     {
         ammoText.text = pistolMag + "/" + pistolAmmo;
-        
-        if (pistolMag <= 0) 
-        {   
-           float timer = 0;
-           isReloading = true;
-           timer += Time.deltaTime;
-           Debug.Log(timer);
-           if(timer >= pistolReloadSpeed) 
+        if (pistolAmmo > 0 && pistolMag > 0) 
+        {
+           if (pistolMag <= 0) 
+           {             
+                isReloading = true;
+                timer += Time.deltaTime;
+                Debug.Log(timer);
+                if(timer > pistolReloadSpeed) 
+                {
+                    pistolMag += pistolMag;
+                    pistolAmmo -= pistolMag;
+                    isReloading = false;
+                    timer = 0f;
+                }
+           }
+
+           if (!isReloading)
            {
-              timer = 0;
-              pistolAmmo -= pistolMag;
-              pistolMag += pistolMag;
-              isReloading = false;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    pistolMag--;
+                    GameObject newBullet = Instantiate(bulletPrefab, bulletPos.position, bulletPos.rotation);
+                    Rigidbody rb = newBullet.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.velocity = bulletPos.forward * bulletSpeed;
+                    }
+                }
            }
         }
+        
+        
 
-        if (!isReloading)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                pistolMag--;
-                GameObject newBullet = Instantiate(bulletPrefab, bulletPos.position, bulletPos.rotation);
-                Rigidbody rb = newBullet.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.velocity = bulletPos.forward * bulletSpeed;
-                }
-            }
-        }
+        
     }
 }
