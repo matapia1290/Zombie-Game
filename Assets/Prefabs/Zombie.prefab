@@ -151,8 +151,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombie: {fileID: 4313496219516755309}
   zombPos: {fileID: 4313496219516755304}
-  hit: 0
   zombieHealth: 1
+  zombPoints: 0
+  lootDropNumber: 0
+  healthPack: {fileID: 8553882498220514385, guid: f729a1cb6a892cf48997c049611d7720,
+    type: 3}
+  AmmoPack: {fileID: 4564921425381000448, guid: 51b067b6c5509b845b3ff85de6be1448,
+    type: 3}
 --- !u!65 &1718104030296723951
 BoxCollider:
   m_ObjectHideFlags: 0

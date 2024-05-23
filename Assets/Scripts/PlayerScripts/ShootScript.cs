@@ -11,61 +11,77 @@ public class ShootScript : MonoBehaviour
     //Ammo text to display on UI
     public Text ammoText;
     //Ammo counts
-    public int pistolMagCount;
-    public int pistolMag;
-    private int pistolAmmo;
-    public float pistolReloadSpeed;
+    private int pistolMagCount = 2;
+    public int pistolMag = 1;
+    public int pistolMagMax;
+    private int pistolAmmo = 1;
+    public float pistolReloadSpeed = 0.9f;
     private int arMag;
     private int arAmmo;
     private int arMagMax;
     private float arReloadSpeed;
     //Reload bools
+    public bool rPressed = false;
     public bool isReloading = false;
-    private float timer = 0;
+    public float timer = 0;
     void Start()
     {
+        pistolMag = pistolMagMax;
         pistolAmmo = pistolMag * pistolMagCount;
+        ammoText.text = "Ammo: " + pistolMag + "/" + pistolAmmo;
     }
     void Update()
     {
         SemiAuto();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ammo")) 
+        {
+            pistolAmmo += Random.Range(1, pistolMagMax);
+        }
+    }
     void SemiAuto()
     {
-        ammoText.text = pistolMag + "/" + pistolAmmo;
-        if (pistolAmmo > 0 && pistolMag > 0) 
+        ammoText.text = "Ammo: " + pistolMag + "/" + pistolAmmo;
+        if (pistolMag > 0 || pistolAmmo > 0)
         {
-           if (pistolMag <= 0) 
-           {             
-                isReloading = true;
+            
+            if (Input.GetKey(KeyCode.R)) 
+            {
+                rPressed = true;
+            }
+           
+            if((pistolMag <= 0 || pistolMag < pistolMagMax && rPressed) && pistolAmmo > 0) 
+            {
+                //Debug.Log(timer); 
                 timer += Time.deltaTime;
-                Debug.Log(timer);
-                if(timer > pistolReloadSpeed) 
-                {
-                    pistolMag += pistolMag;
-                    pistolAmmo -= pistolMag;
+                if (timer >= pistolReloadSpeed) 
+                {   
                     isReloading = false;
-                    timer = 0f;
+                    rPressed = false;
+                    int remainingAmmo = Mathf.Max(0,pistolAmmo - (pistolMagMax - pistolMag));
+                   // Debug.Log("Ammo Left " + remainingAmmo);
+                    pistolMag = Mathf.Min(pistolAmmo + remainingAmmo, pistolMagMax);
+                    //Debug.Log("Pistol Mag " + pistolMag);
+                    pistolAmmo = remainingAmmo;
+                    timer = 0;
                 }
-           }
-
-           if (!isReloading)
-           {
-                if (Input.GetMouseButtonDown(0))
-                {
+            }
+            
+            if(!isReloading && pistolMag > 0) 
+            {
+                 if(Input.GetMouseButtonDown(0))
+                 {
                     pistolMag--;
                     GameObject newBullet = Instantiate(bulletPrefab, bulletPos.position, bulletPos.rotation);
                     Rigidbody rb = newBullet.GetComponent<Rigidbody>();
-                    if (rb != null)
+                    if(rb != null)
                     {
                         rb.velocity = bulletPos.forward * bulletSpeed;
                     }
-                }
-           }
+                 }
+            }
         }
-        
-        
-
-        
     }
 }
