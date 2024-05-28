@@ -29,7 +29,8 @@ public class ZombieMovement : MonoBehaviour
         zombie.SetDestination(player.transform.position);
    
         if (hit == zombieHealth) 
-        {
+        { 
+            Destroy(gameObject);
             switch(lootDropNumber)
             {
                 case 1:
@@ -41,7 +42,7 @@ public class ZombieMovement : MonoBehaviour
             }
                 
             zombPoints++;
-            Destroy(gameObject);
+           
         }
             
     }

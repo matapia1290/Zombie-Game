@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        deathCam.enabled = false;
     }
     void Awake()
     {
@@ -30,10 +31,10 @@ public class PlayerStats : MonoBehaviour
         mouse = player.GetComponent<MouseMovement>();
         
     }
-
+   
     void Update()
     {
-        if (playerHealth <= 0) 
+        if (playerHealth <= 0 || gameObject.transform.position.y < -3f) 
         {
             playerHealth = 0;
             move.enabled = false;

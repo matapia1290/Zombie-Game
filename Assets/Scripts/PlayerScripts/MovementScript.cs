@@ -51,8 +51,6 @@ public class MovementScript : MonoBehaviour
             }
 
         }
-
-
         if (isGrounded == true)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -61,8 +59,6 @@ public class MovementScript : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpSpeed);
             }
         }
-
-        
     }
     void OnCollisionEnter(Collision collision)
     {

@@ -259,7 +259,7 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 200
   ammoText: {fileID: 0}
-  pistolMag: 2
+  pistolMag: 10
   pistolMagMax: 16
   pistolReloadSpeed: 0.9
   rPressed: 0

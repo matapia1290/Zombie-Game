@@ -11,10 +11,10 @@ public class ShootScript : MonoBehaviour
     //Ammo text to display on UI
     public Text ammoText;
     //Ammo counts
-    private int pistolMagCount = 2;
-    public int pistolMag = 1;
+    public int pistolMagCount;
+    private int pistolMag ;
     public int pistolMagMax;
-    private int pistolAmmo = 1;
+    private int pistolAmmo;
     public float pistolReloadSpeed = 0.9f;
     private int arMag;
     private int arAmmo;
@@ -27,7 +27,7 @@ public class ShootScript : MonoBehaviour
     void Start()
     {
         pistolMag = pistolMagMax;
-        pistolAmmo = pistolMag * pistolMagCount;
+        pistolAmmo = pistolMagMax * pistolMagCount;
         ammoText.text = "Ammo: " + pistolMag + "/" + pistolAmmo;
     }
     void Update()
@@ -38,8 +38,8 @@ public class ShootScript : MonoBehaviour
     {
         if (other.CompareTag("Ammo")) 
         {
-            pistolAmmo += Random.Range(1, pistolMagMax);
-        }
+            pistolAmmo += pistolMagMax;
+        } 
     }
     void SemiAuto()
     {

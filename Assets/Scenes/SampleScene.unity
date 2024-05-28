@@ -17986,8 +17986,8 @@ Transform:
   - {fileID: 1199549039}
   - {fileID: 470114171}
   - {fileID: 861432226}
-  - {fileID: 1203152757}
   - {fileID: 1854399780}
+  - {fileID: 1203152757}
   - {fileID: 1656581785}
   - {fileID: 873731284}
   - {fileID: 1464300818}
@@ -18001,20 +18001,20 @@ Transform:
   - {fileID: 1659740224}
   - {fileID: 1724199523}
   - {fileID: 1643472223}
-  - {fileID: 590720341}
   - {fileID: 1943163897}
+  - {fileID: 590720341}
   - {fileID: 537720215}
   - {fileID: 1564198482}
-  - {fileID: 1518709052}
   - {fileID: 905910902}
+  - {fileID: 1518709052}
   - {fileID: 457085146}
   - {fileID: 710041426}
   - {fileID: 706192946}
   - {fileID: 1929538109}
-  - {fileID: 1421266176}
   - {fileID: 285440093}
-  - {fileID: 79910014}
+  - {fileID: 1421266176}
   - {fileID: 1904828464}
+  - {fileID: 79910014}
   m_Father: {fileID: 25740077}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24456,11 +24456,6 @@ PrefabInstance:
       propertyPath: deathCam
       value: 
       objectReference: {fileID: 64090681}
-    - target: {fileID: 7241453882543346775, guid: f1c9f35db8342a04289f79a9f0d1fcac,
-        type: 3}
-      propertyPath: playerHealth
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8394624360790943449, guid: f1c9f35db8342a04289f79a9f0d1fcac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24534,11 +24529,6 @@ PrefabInstance:
     - target: {fileID: 8394624360790943462, guid: f1c9f35db8342a04289f79a9f0d1fcac,
         type: 3}
       propertyPath: pistolMagCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8394624360790943462, guid: f1c9f35db8342a04289f79a9f0d1fcac,
-        type: 3}
-      propertyPath: pistolMag
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8394624362201852540, guid: f1c9f35db8342a04289f79a9f0d1fcac,
