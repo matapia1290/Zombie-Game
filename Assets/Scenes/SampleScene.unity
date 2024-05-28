@@ -24526,11 +24526,6 @@ PrefabInstance:
       propertyPath: pistolAmmo
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8394624360790943462, guid: f1c9f35db8342a04289f79a9f0d1fcac,
-        type: 3}
-      propertyPath: pistolMagCount
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8394624362201852540, guid: f1c9f35db8342a04289f79a9f0d1fcac,
         type: 3}
       propertyPath: m_ClearFlags
