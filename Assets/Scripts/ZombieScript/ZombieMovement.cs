@@ -27,7 +27,17 @@ public class ZombieMovement : MonoBehaviour
     void Update()
     {
         zombie.SetDestination(player.transform.position);
-   
+        
+        if (zombie.remainingDistance > 2f) 
+        {
+            zombie.isStopped = false;
+            zombie.SetDestination(player.transform.position);
+        }
+        else 
+        {
+            zombie.isStopped = true;
+        }
+        
         if (hit == zombieHealth) 
         { 
             Destroy(gameObject);

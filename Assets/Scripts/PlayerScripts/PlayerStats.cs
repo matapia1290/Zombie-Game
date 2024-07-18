@@ -7,14 +7,18 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private int playerHealth;
     private int playerPoints;
+    private int playerStamina;
     public GameObject player;
+    public GameObject spawner;
     public Text healthText;
     public Text pointsText;
+    public Text staminaText;
     public Camera deathCam;
     Points points;
     MovementScript move;
     ShootScript shoot;
     MouseMovement mouse;
+    ZombieSpawner zombSpawner;
     public Camera mainCamera;
     public GameObject floor;
     Rigidbody rb;
@@ -25,10 +29,12 @@ public class PlayerStats : MonoBehaviour
     }
     void Awake()
     {
+        zombSpawner = spawner.GetComponent<ZombieSpawner>();
         points = floor.GetComponent<Points>();
         move = player.GetComponent<MovementScript>();
         shoot = player.GetComponent<ShootScript>();
         mouse = player.GetComponent<MouseMovement>();
+        
         
     }
    
@@ -42,19 +48,26 @@ public class PlayerStats : MonoBehaviour
             mouse.enabled = false;
             mainCamera.enabled = false;
             deathCam.enabled = true;
+            zombSpawner.enabled = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
+        playerStamina = Mathf.FloorToInt(move.staminaMeter);
         playerPoints = points.points;
         healthText.text = "Health: " + playerHealth;
         pointsText.text = "Points: " + playerPoints;
+        staminaText.text = "Stamina: " + playerStamina;
     }
-
+    
+    
     private void OnTriggerEnter(Collider other)
     {
      
         if (other.CompareTag("Zombie")) 
         {
+            
                 playerHealth -= Random.Range(1, 5);
+              
+                
         }
 
         if (other.CompareTag("Health"))
@@ -66,5 +79,9 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+    
+    
+    
+    
 
 }

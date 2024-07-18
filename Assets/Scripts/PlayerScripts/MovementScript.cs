@@ -8,6 +8,7 @@ public class MovementScript : MonoBehaviour
     public float moveSpeed = 0f;
     public float jumpSpeed = 0f;
     public bool isGrounded = true;
+    public float staminaMeter;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,6 +17,7 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RegenStamina();
         float x = Input.GetAxis("Horizontal") * moveSpeed;
         float z = Input.GetAxis("Vertical") * moveSpeed;
         //Input on change speed
@@ -23,40 +25,68 @@ public class MovementScript : MonoBehaviour
         //Input to move forward 
         if (Input.GetAxis("Horizontal") != 0)
         {
-            if (Input.GetKey(KeyCode.LeftShift)) 
+            if (Input.GetKey(KeyCode.LeftShift) && staminaMeter > 0) 
             {
                 moveSpeed = 8.5f;
                 transform.Translate(Vector3.right * x * Time.deltaTime);
+                UseStamina();
             }
             else 
             {
                 moveSpeed = 5f; ;
                 transform.Translate(Vector3.right * x * Time.deltaTime);
+                
             }
            
         }
        
         //Input to move sideways 
-        if (Input.GetAxis("Vertical") != 0 )
+        if (Input.GetAxis("Vertical") != 0)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && staminaMeter > 0)
             {
                 moveSpeed  = 8.5f;
                 transform.Translate(Vector3.forward * z * Time.deltaTime);
+                UseStamina();
             }
             else
             {
                 moveSpeed = 5f;
                 transform.Translate(Vector3.forward * z * Time.deltaTime);
+                
             }
-
+            
         }
+        
         if (isGrounded == true)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 jumpSpeed = 300;
                 rb.AddForce(Vector3.up * jumpSpeed);
+            }
+        }
+    }
+    void RegenStamina() 
+    {
+        if(staminaMeter < 100) 
+        {
+            staminaMeter += Time.deltaTime * 5;
+            if (staminaMeter>= 100) 
+            {
+                staminaMeter = 100;
+            }
+        }
+    }
+    void UseStamina()
+    {
+        if (staminaMeter <= 100 && staminaMeter >= 0)
+        {
+            staminaMeter -= Time.deltaTime * 10;
+            if (staminaMeter <= 0)
+            {
+                moveSpeed = 5f;
+                staminaMeter = 0;
             }
         }
     }

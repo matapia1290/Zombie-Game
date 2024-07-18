@@ -225,6 +225,7 @@ MonoBehaviour:
   moveSpeed: 0
   jumpSpeed: 0
   isGrounded: 1
+  staminaMeter: 100
 --- !u!114 &8394624360790943463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +277,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7241453882543346775
 MonoBehaviour:
@@ -292,8 +293,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 100
   player: {fileID: 8394624360790943457}
+  spawner: {fileID: 0}
   healthText: {fileID: 0}
   pointsText: {fileID: 0}
+  staminaText: {fileID: 0}
   deathCam: {fileID: 0}
   mainCamera: {fileID: 8394624362201852540}
   floor: {fileID: 0}
