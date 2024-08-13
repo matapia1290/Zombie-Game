@@ -7,8 +7,8 @@ public class ZombieSpawner : MonoBehaviour
     public Transform[] zombieSpawner;
     public GameObject zombiePrefab;
     private int maxZombie;
-    public float nextRoundTimer = 0f;
-    private float waveSpeed = 30f;
+    private float nextRoundTimer = 0f;
+    public float waveSpeed = 30f;
     void Start()
     {
         maxZombie = zombieSpawner.Length;

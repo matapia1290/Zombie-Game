@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
     public Text healthText;
     public Text pointsText;
     public Text staminaText;
-    public Camera deathCam;
+    public Text gameOver;
     Points points;
     MovementScript move;
     ShootScript shoot;
@@ -25,7 +25,6 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        deathCam.enabled = false;
     }
     void Awake()
     {
@@ -46,8 +45,6 @@ public class PlayerStats : MonoBehaviour
             move.enabled = false;
             shoot.enabled = false;
             mouse.enabled = false;
-            mainCamera.enabled = false;
-            deathCam.enabled = true;
             zombSpawner.enabled = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -57,31 +54,30 @@ public class PlayerStats : MonoBehaviour
         pointsText.text = "Points: " + playerPoints;
         staminaText.text = "Stamina: " + playerStamina;
     }
-    
-    
-    private void OnTriggerEnter(Collider other)
+
+
+    private void OnCollisionEnter(Collision collision)
     {
-     
-        if (other.CompareTag("Zombie")) 
+        if (collision.gameObject.CompareTag("Zombie"))
         {
-            
-                playerHealth -= Random.Range(1, 5);
-              
-                
+
+            playerHealth -= Random.Range(1, 5);
+
+
         }
 
-        if (other.CompareTag("Health"))
+        if (collision.gameObject.CompareTag("Health"))
         {
             playerHealth += Random.Range(1, 10);
-            if (playerHealth > 100) 
+            if (playerHealth > 100)
             {
                 playerHealth = 100;
             }
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 }

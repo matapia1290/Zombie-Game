@@ -8,9 +8,9 @@ public class PicupLogic : MonoBehaviour
     {
         Destroy(gameObject, 30f);    
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player")) 
+        if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
         }

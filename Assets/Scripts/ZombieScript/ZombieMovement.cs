@@ -5,14 +5,15 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 public class ZombieMovement : MonoBehaviour
 {
+    public List<GameObject> humans = new List<GameObject>();
     public NavMeshAgent zombie;
     public Transform zombPos;
-    private int hit = 0;
     public int zombieHealth;
     public int zombPoints = 0;
     public int lootDropNumber;
     public GameObject healthPack, AmmoPack;
     private GameObject player;
+    private GameObject ally;
    // public Transform player;
 
     void Start()
@@ -20,25 +21,14 @@ public class ZombieMovement : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         zombie = GetComponent<NavMeshAgent>();
         lootDropNumber = Random.Range(1,10);
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        zombie.SetDestination(player.transform.position);
-        
-        if (zombie.remainingDistance > 2f) 
-        {
-            zombie.isStopped = false;
-            zombie.SetDestination(player.transform.position);
-        }
-        else 
-        {
-            zombie.isStopped = true;
-        }
-        
-        if (hit == zombieHealth) 
+        //ZombieRoam();
+        ChooseToChase();
+        if (0 == zombieHealth) 
         { 
             Destroy(gameObject);
             switch(lootDropNumber)
@@ -50,18 +40,55 @@ public class ZombieMovement : MonoBehaviour
                     Instantiate(AmmoPack, zombPos.position + Vector3.up, zombPos.rotation);
                     break;
             }
-                
             zombPoints++;
-           
         }
             
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collider.tag == "Bullet")
+        if (collision.collider.CompareTag("Bullet")) 
         {
-            hit += 1;
+            zombieHealth -= 1;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Ally") && !humans.Contains(other.gameObject)) 
+        {
+            humans.Add(other.gameObject);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Ally"))
+        {
+            humans.Remove(other.gameObject);
+        }
+    }
+    void ChooseToChase() 
+    {
+        
+        for (int i = 0; i < humans.Count;i++) 
+        {
+            if (humans[i] != null) 
+            {
+                float distance = gameObject.transform.position.magnitude - humans[i].transform.position.magnitude;
+
+                if (distance <= 50f)
+                {
+                    zombie.SetDestination(humans[i].transform.position);
+                }
+            }
+            else 
+            {
+                humans.Remove(humans[i]);
+            }
+
+            
+            
+        }
+    }
+    
+
 }

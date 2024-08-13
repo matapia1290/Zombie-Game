@@ -34,12 +34,12 @@ public class ShootScript : MonoBehaviour
     {
         SemiAuto();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Ammo")) 
+        if (collision.gameObject.CompareTag("Ammo"))
         {
             pistolAmmo += pistolMagMax;
-        } 
+        }
     }
     void SemiAuto()
     {

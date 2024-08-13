@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4313496219516755308}
   - component: {fileID: 4313496219516755309}
   - component: {fileID: 4313496219516755314}
-  - component: {fileID: 1718104030296723951}
+  - component: {fileID: 5485486023200819276}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Zombie
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4313496219516755315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -95.6, y: 1.5, z: 2.52}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c138c5f201061444394261a2654565c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humans: []
   zombie: {fileID: 4313496219516755309}
   zombPos: {fileID: 4313496219516755304}
   zombieHealth: 1
@@ -158,8 +159,8 @@ MonoBehaviour:
     type: 3}
   AmmoPack: {fileID: 4564921425381000448, guid: 51b067b6c5509b845b3ff85de6be1448,
     type: 3}
---- !u!65 &1718104030296723951
-BoxCollider:
+--- !u!135 &5485486023200819276
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -169,5 +170,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
