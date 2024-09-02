@@ -8,7 +8,7 @@ public class AllyMovement : MonoBehaviour
     public NavMeshAgent ally;
     GameObject player;
     AllyShootLogic allyShootLogic;
-    public int patrolIndex;
+    public int patrolIndex = 0;
     public bool followPlayer = false;
     void Awake()
     {
@@ -25,8 +25,27 @@ public class AllyMovement : MonoBehaviour
 
     void Update()
     {
-        float distance = gameObject.transform.position.magnitude - player.transform.position.magnitude;
-        Debug.Log(distance);
+        //float playerDistance = Mathf.Abs(gameObject.transform.position.magnitude - player.transform.position.magnitude);
+        for (int i = 0; i < allyShootLogic.Zombie.Count; i++) 
+        {
+            float zombieDistance = Mathf.Abs(gameObject.transform.position.magnitude - allyShootLogic.Zombie[i].transform.position.magnitude);
+            if (allyShootLogic.Zombie[i] != null )
+            {
+                
+                if (zombieDistance < 10f)
+                {
+                    ally.isStopped = true;
+                    //Debug.Log("Engaging Zombie");
+                }
+
+            }
+            Patrol();
+            
+            
+
+        }
+        
+        /*
         if (!followPlayer && Input.GetKey(KeyCode.E) && distance <=1f) 
         {
             if (allyShootLogic.Zombie.Count > 0) 
@@ -50,17 +69,20 @@ public class AllyMovement : MonoBehaviour
                 FollowPlayer();
             }
         }
-        
+        */
     }
     void Patrol()
     {
-       
-        if (ally.remainingDistance < 1f) 
+        ally.isStopped = false;
+        if (ally.remainingDistance > 5f)
+        {
+            ally.SetDestination(patrolLocation[patrolIndex].position);
+        }
+        else
         {
             patrolIndex = Random.Range(0, patrolLocation.Count - 1);
             ally.SetDestination(patrolLocation[patrolIndex].position);
         }
-         
     }
     void FollowPlayer() 
     {
@@ -73,5 +95,9 @@ public class AllyMovement : MonoBehaviour
         {
             ally.isStopped = false;
         }
+    }
+    void EngageMode() 
+    {
+        
     }
 }

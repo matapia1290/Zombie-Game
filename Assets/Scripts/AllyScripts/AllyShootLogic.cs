@@ -37,7 +37,6 @@ public class AllyShootLogic : MonoBehaviour
         if (Zombie.Count > 0) 
         {
             ClosestZombie();
-            Shoot();
         }
     }
     
@@ -63,13 +62,14 @@ public class AllyShootLogic : MonoBehaviour
         {
             if (Zombie[i] != null) 
             {
-                float distance = gameObject.transform.position.magnitude - Zombie[i].transform.position.magnitude;
-                //Debug.Log("Distance of: " + distance + " of :" + Zombie[i].name);
-                if (distance <= 30f)
-                {
-                    allyTransform.LookAt(Zombie[i].transform);
-                }
+                float zombieDistance = Mathf.Abs(gameObject.transform.position.magnitude - Zombie[i].transform.position.magnitude);
                 
+                if (zombieDistance < 10f)
+                {
+                    Debug.Log("Distance of: " + zombieDistance + " of :" + Zombie[i].name);
+                    allyTransform.LookAt(Zombie[i].transform);
+                    Shoot();
+                }
             }
             else
             {
@@ -78,30 +78,21 @@ public class AllyShootLogic : MonoBehaviour
 
         }
     }
-   
 
-     void OnTriggerEnter(Collider other)
-     {
-        if (other.gameObject.CompareTag("Zombie")) 
-        {
-            if (!Zombie.Contains(other.gameObject)) 
-            {
-                Zombie.Add(other.gameObject);
-            }
-        }
-     }
-
-    private void OnTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Zombie"))
         {
-            if (Zombie.Contains(other.gameObject))
-            {
-                Zombie.Remove(other.gameObject);
-            }
+            Zombie.Add(other.gameObject);
         }
     }
-
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Zombie"))
+        {
+            Zombie.Remove(other.gameObject);
+        }
+    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Zombie")) 

@@ -4,34 +4,44 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    public Transform[] zombieSpawner;
     public GameObject zombiePrefab;
-    private int maxZombie;
-    private float nextRoundTimer = 0f;
-    public float waveSpeed = 30f;
-    void Start()
+    float spawnTimer;
+    float timer = 0;
+    bool isNear = false;
+    float randomizedSpawnTimer;
+    void Start() 
     {
-        maxZombie = zombieSpawner.Length;
-        for(int i = 0; i < maxZombie; i++) 
+        spawnTimer = Random.Range(30,60);
+    }
+    void Update() 
+    {
+        if (isNear)
         {
-            GameObject newZombie = Instantiate(zombiePrefab, zombieSpawner[i].position, Quaternion.identity);
+            timer += Time.deltaTime;
+            if (timer > spawnTimer)
+            {
+
+                Instantiate(zombiePrefab, gameObject.transform.position, gameObject.transform.rotation);
+                timer = 0;
+                spawnTimer = Random.Range(30, 60);
+            }
+        }
+        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+      if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ally")) 
+      {
+            isNear = true;
+      }
+    }
+
+    void OnTriggerExit(Collider other) 
+    {
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ally"))
+        {
+            isNear = false;
         }
     }
-    void Update()
-    {
-        nextRoundTimer+= Time.deltaTime;
-        if(nextRoundTimer > waveSpeed) 
-        {
-            nextRoundTimer = 0;
-            for (int i = 0; i < maxZombie; i++)
-            {
-                GameObject newZombie = Instantiate(zombiePrefab, zombieSpawner[i].position, Quaternion.identity);
-
-            }
-            if (waveSpeed > 15f) 
-            {
-                waveSpeed -= 5f;
-            }
-        }
-    }  
 }
