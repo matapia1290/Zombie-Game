@@ -7,10 +7,11 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject zombiePrefab;
     float spawnTimer;
     float timer = 0;
-    bool isNear = false;
+    bool isNear = true;
     float randomizedSpawnTimer;
     void Start() 
     {
+        Instantiate(zombiePrefab, gameObject.transform.position, gameObject.transform.rotation);
         spawnTimer = Random.Range(30,60);
     }
     void Update() 

@@ -8,6 +8,10 @@ public class MovementScript : MonoBehaviour
     public float moveSpeed = 0f;
     public float jumpSpeed = 0f;
     public bool isGrounded = true;
+
+
+
+
     public float staminaMeter;
     void Start()
     {

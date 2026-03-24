@@ -68,7 +68,8 @@ public class ZombieMovement : MonoBehaviour
     }
     void ChooseToChase() 
     {
-        
+
+        if (humans.Count <= 0) return;
         for (int i = 0; i < humans.Count;i++) 
         {
             if (humans[i] != null) 
