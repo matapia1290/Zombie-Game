@@ -6,21 +6,19 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
     private int playerHealth;
-    private int playerPoints;
+    public int playerPoints;
     private int playerStamina;
     public GameObject player;
     public GameObject spawner;
     public Text healthText;
     public Text pointsText;
     public Text staminaText;
-    public Text gameOver;
-    Points points;
+    ///public Text gameOver;
     MovementScript move;
     ShootScript shoot;
     MouseMovement mouse;
     ZombieSpawner zombSpawner;
     public Camera mainCamera;
-    public GameObject floor;
     Rigidbody rb;
     void Start()
     {
@@ -28,13 +26,10 @@ public class PlayerStats : MonoBehaviour
     }
     void Awake()
     {
-        zombSpawner = spawner.GetComponent<ZombieSpawner>();
-        points = floor.GetComponent<Points>();
+
         move = player.GetComponent<MovementScript>();
         shoot = player.GetComponent<ShootScript>();
         mouse = player.GetComponent<MouseMovement>();
-        
-        
     }
    
     void Update()
@@ -49,7 +44,6 @@ public class PlayerStats : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         playerStamina = Mathf.FloorToInt(move.staminaMeter);
-        playerPoints = points.points;
         healthText.text = "Health: " + playerHealth;
         pointsText.text = "Points: " + playerPoints;
         staminaText.text = "Stamina: " + playerStamina;

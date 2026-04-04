@@ -14,11 +14,13 @@ public class ZombieMovement : MonoBehaviour
     public GameObject healthPack, AmmoPack;
     private GameObject player;
     private GameObject ally;
-   // public Transform player;
+    // public Transform player;
 
+    PlayerStats stats;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
         zombie = GetComponent<NavMeshAgent>();
         lootDropNumber = Random.Range(1,10);
     }
@@ -40,7 +42,8 @@ public class ZombieMovement : MonoBehaviour
                     Instantiate(AmmoPack, zombPos.position + Vector3.up, zombPos.rotation);
                     break;
             }
-            zombPoints++;
+            stats.playerPoints+= 3;
+           
         }
             
     }
@@ -74,7 +77,7 @@ public class ZombieMovement : MonoBehaviour
         {
             if (humans[i] != null) 
             {
-                float distance = gameObject.transform.position.magnitude - humans[i].transform.position.magnitude;
+                float distance = Vector3.Distance(transform.position, humans[i].transform.position);
 
                 if (distance <= 50f)
                 {
