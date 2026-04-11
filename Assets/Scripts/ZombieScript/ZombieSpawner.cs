@@ -5,44 +5,19 @@ using UnityEngine;
 public class ZombieSpawner : MonoBehaviour
 {
     public GameObject zombiePrefab;
-    float spawnTimer;
-    float timer = 0;
-    bool isNear = true;
-    float randomizedSpawnTimer;
+    PlayerStats player;
     void Start() 
     {
-        Instantiate(zombiePrefab, gameObject.transform.position, gameObject.transform.rotation);
-        spawnTimer = Random.Range(30,60);
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        StartCoroutine(Spawner());
     }
-    void Update() 
+
+    IEnumerator Spawner() 
     {
-        if (isNear)
+        while (player.playerHealth > 0) 
         {
-            timer += Time.deltaTime;
-            if (timer > spawnTimer)
-            {
-
-                Instantiate(zombiePrefab, gameObject.transform.position, gameObject.transform.rotation);
-                timer = 0;
-                spawnTimer = Random.Range(30, 60);
-            }
-        }
-        
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-      if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ally")) 
-      {
-            isNear = true;
-      }
-    }
-
-    void OnTriggerExit(Collider other) 
-    {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ally"))
-        {
-            isNear = false;
+            yield return new WaitForSeconds(Random.Range(0,2));
+            Instantiate(zombiePrefab, new Vector3(Random.Range(-350,350) ,2, (Random.Range(-350, 350))) + transform.position, Quaternion.identity);
         }
     }
 }

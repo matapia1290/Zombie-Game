@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShootScript : MonoBehaviour
 {
-    //Vars to make shooting possible
-    public Transform bulletPos;
-    public GameObject bulletPrefab;
-    public float bulletSpeed = 0;
     //Ammo text to display on UI
     public Text ammoText;
     //Ammo counts
@@ -16,10 +12,6 @@ public class ShootScript : MonoBehaviour
     public int pistolMagMax;
     private int pistolAmmo;
     public float pistolReloadSpeed = 0.9f;
-    private int arMag;
-    private int arAmmo;
-    private int arMagMax;
-    private float arReloadSpeed;
     //Reload bools
     public bool rPressed = false;
     public bool isReloading = false;
@@ -74,13 +66,29 @@ public class ShootScript : MonoBehaviour
                  if(Input.GetMouseButtonDown(0))
                  {
                     pistolMag--;
-                    GameObject newBullet = Instantiate(bulletPrefab, bulletPos.position, bulletPos.rotation);
-                    Rigidbody rb = newBullet.GetComponent<Rigidbody>();
-                    if(rb != null)
-                    {
-                        rb.velocity = bulletPos.forward * bulletSpeed;
-                    }
+                        Shoot();
+                    
                  }
+            }
+        }
+    }
+    void Shoot()
+    {
+        // Calculate the center of the camera viewport
+        Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        // Perform the raycast
+        if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit,Mathf.Infinity))
+        {
+           
+
+            // Attempt to get a health component on the hit object
+            ZombieMovement enemy = hit.collider.GetComponent<ZombieMovement>();
+            if (enemy != null)
+            {
+                Debug.Log("Hit: " + hit.collider.name);
+                enemy.zombieHealth--;
             }
         }
     }

@@ -9,7 +9,6 @@ public class ZombieMovement : MonoBehaviour
     public NavMeshAgent zombie;
     public Transform zombPos;
     public int zombieHealth;
-    public int zombPoints = 0;
     public int lootDropNumber;
     public GameObject healthPack, AmmoPack;
     private GameObject player;
@@ -20,7 +19,12 @@ public class ZombieMovement : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        stats = player.GetComponent<PlayerStats>();
+        if (player!= null) 
+        {
+            humans.Add(player);
+             stats = player.GetComponent<PlayerStats>();
+        }
+       
         zombie = GetComponent<NavMeshAgent>();
         lootDropNumber = Random.Range(1,10);
     }
@@ -30,43 +34,30 @@ public class ZombieMovement : MonoBehaviour
     {
         //ZombieRoam();
         ChooseToChase();
-        if (0 == zombieHealth) 
+        RemoveNull();
+        if (1  > zombieHealth) 
         { 
             Destroy(gameObject);
             switch(lootDropNumber)
             {
                 case 1:
-                    Instantiate(healthPack, zombPos.position + Vector3.up, zombPos.rotation);
+                    Instantiate(healthPack, transform.position + Vector3.up, transform.rotation);
                 break;
                 case 2:
-                    Instantiate(AmmoPack, zombPos.position + Vector3.up, zombPos.rotation);
+                    Instantiate(AmmoPack, transform.position + Vector3.up, transform.rotation);
                     break;
             }
-            stats.playerPoints+= 3;
+            stats.playerPoints++;
            
         }
             
     }
-
-    private void OnCollisionEnter(Collision collision)
+    void RemoveNull() 
     {
-        if (collision.collider.CompareTag("Bullet")) 
+        if (humans.Count <= 0) return;
+        for (int i = 0; i < humans.Count; i++) 
         {
-            zombieHealth -= 1;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") || other.CompareTag("Ally") && !humans.Contains(other.gameObject)) 
-        {
-            humans.Add(other.gameObject);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") || other.CompareTag("Ally"))
-        {
-            humans.Remove(other.gameObject);
+            if (humans[i] == null) humans.Remove(humans[i]);
         }
     }
     void ChooseToChase() 
@@ -84,15 +75,8 @@ public class ZombieMovement : MonoBehaviour
                     zombie.SetDestination(humans[i].transform.position);
                 }
             }
-            else 
-            {
-                humans.Remove(humans[i]);
-            }
 
-            
-            
         }
     }
-    
 
 }
