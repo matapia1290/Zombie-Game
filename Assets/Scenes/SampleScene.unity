@@ -122,84 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 64d25d3d2dbe6064598b588ab38b9020, type: 2}
---- !u!1001 &68685419
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 454
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 479
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755304, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755314, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: zombieHealth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313496219516755315, guid: 3e34366e822939340b99fed995709625,
-        type: 3}
-      propertyPath: m_Name
-      value: Zombie
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3e34366e822939340b99fed995709625, type: 3}
 --- !u!1 &618529791
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,8 +658,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a42f49231b10f4e9a20ab691ebea03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 4313496219516755315, guid: 3e34366e822939340b99fed995709625,
-    type: 3}
+  zombies:
+  - {fileID: 3686589451678578409, guid: af58dd766100b324095b27e5f3ff3697, type: 3}
+  - {fileID: 8381886205421733106, guid: 75bdbb52bf05b9149be575cb3a31c9d1, type: 3}
+  - {fileID: 6499273412102416113, guid: ae91324f6a0e56e4aa2f46dbfa759195, type: 3}
+  - {fileID: 3433681654084449092, guid: ff020f2c4040e0e418c3a2980130965a, type: 3}
+  - {fileID: 1312513940644331506, guid: 76b10bd8ec86ac74084a9f57cea21acc, type: 3}
+  - {fileID: 8414058611199646972, guid: cd8778b9ef04e0c40961dcf7656a697f, type: 3}
+  - {fileID: 2038723358792369142, guid: 6b0134bafab7b8a41ab057e0a8eba41e, type: 3}
+  - {fileID: 3403419187953465436, guid: 32ae3a1ed10370746a1aed1e66f67cc2, type: 3}
+  - {fileID: 4211845767757421592, guid: b95300fc189093b489d803985532b19c, type: 3}
+  - {fileID: 7901885472347641304, guid: ab295da0bd79f264198925bc08399e53, type: 3}
+  - {fileID: 4323724482933081180, guid: 34beef023dbba9c47ab152258f25c5ae, type: 3}
+  - {fileID: 4381159318308432117, guid: a360de0653be03146afddb428d30cc2f, type: 3}
 --- !u!1 &1673785617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1388,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
-  - {fileID: 68685419}
   - {fileID: 622149667}
   - {fileID: 1406610242}
   - {fileID: 618529795}

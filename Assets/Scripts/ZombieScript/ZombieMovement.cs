@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ZombieMovement : MonoBehaviour
 {
     public List<GameObject> humans = new List<GameObject>();
+
     public NavMeshAgent zombie;
     public Transform zombPos;
     public int zombieHealth;
@@ -18,6 +19,9 @@ public class ZombieMovement : MonoBehaviour
     PlayerStats stats;
     void Start()
     {
+        
+
+
         player = GameObject.FindWithTag("Player");
         if (player!= null) 
         {

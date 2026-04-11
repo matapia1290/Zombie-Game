@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    public GameObject zombiePrefab;
+    public List<GameObject> zombies = new List<GameObject>();
     PlayerStats player;
     void Start() 
     {
@@ -17,7 +17,7 @@ public class ZombieSpawner : MonoBehaviour
         while (player.playerHealth > 0) 
         {
             yield return new WaitForSeconds(Random.Range(0,2));
-            Instantiate(zombiePrefab, new Vector3(Random.Range(-350,350) ,2, (Random.Range(-350, 350))) + transform.position, Quaternion.identity);
+            Instantiate(zombies[Random.Range(0,zombies.Count)], new Vector3(Random.Range(-350,350) ,2, (Random.Range(-350, 350))) + transform.position, Quaternion.identity);
         }
     }
 }
