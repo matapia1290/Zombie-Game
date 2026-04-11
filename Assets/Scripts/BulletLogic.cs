@@ -7,10 +7,6 @@ public class BulletLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, 5);       
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(gameObject);
+        Destroy(gameObject, 2);       
     }
 }
