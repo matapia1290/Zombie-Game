@@ -17,8 +17,8 @@ public class ZombieSpawner : MonoBehaviour
         while (player.playerHealth > 0) 
         {
             yield return new WaitForSeconds(Random.Range(0,2));
-            GameObject newZombie = Instantiate(zombies[Random.Range(0,zombies.Count)], new Vector3(Random.Range(-350,350) ,2, (Random.Range(-350, 350))) + transform.position, Quaternion.identity);
-            Destroy(newZombie,120);
+           Instantiate(zombies[Random.Range(0,zombies.Count)], new Vector3(Random.Range(-350,350) ,2, (Random.Range(-350, 350))) + transform.position, Quaternion.identity);
+            
         }
     }
 }
