@@ -47,8 +47,10 @@ public class PlayerStats : MonoBehaviour
         healthText.text = "Health: " + playerHealth;
         pointsText.text = "Points: " + playerPoints;
         staminaText.text = "Stamina: " + playerStamina;
+      
     }
 
+           
 
     private void OnCollisionEnter(Collision collision)
     {

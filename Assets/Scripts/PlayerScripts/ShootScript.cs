@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShootScript : MonoBehaviour
 {
+    //Line render
+    LineRenderer lineRenderer;
     //Ammo text to display on UI
     public Text ammoText;
     //Ammo counts
@@ -18,6 +20,8 @@ public class ShootScript : MonoBehaviour
     public float timer = 0;
     void Start()
     {
+        lineRenderer = GetComponent<LineRenderer>();
+        
         pistolMag = pistolMagMax;
         pistolAmmo = pistolMagMax * pistolMagCount;
         ammoText.text = "Ammo: " + pistolMag + "/" + pistolAmmo;
@@ -81,15 +85,27 @@ public class ShootScript : MonoBehaviour
         // Perform the raycast
         if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit,Mathf.Infinity))
         {
-           
-
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, Camera.main.transform.position + Camera.main.transform.forward + new Vector3(0,-0.3f,0f));
+            lineRenderer.SetPosition(1, hit.point);
+            StartCoroutine(LineSpawner());
             // Attempt to get a health component on the hit object
             ZombieMovement enemy = hit.collider.GetComponent<ZombieMovement>();
             if (enemy != null)
             {
                 Debug.Log("Hit: " + hit.collider.name);
                 enemy.zombieHealth--;
+               
             }
         }
+    }
+
+    IEnumerator LineSpawner() 
+    {
+       
+        
+        yield return new WaitForSeconds(2f);
+
+        lineRenderer.enabled = false;
     }
 }

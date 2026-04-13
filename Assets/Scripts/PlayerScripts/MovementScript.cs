@@ -34,8 +34,8 @@ public class MovementScript : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift) && staminaMeter > 0;
+        
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) && staminaMeter > 0;
         float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
         if (isSprinting && (x != 0 || z != 0))
