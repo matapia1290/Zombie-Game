@@ -30,7 +30,7 @@ public class ZombieMovement : MonoBehaviour
         }
        
         zombie = GetComponent<NavMeshAgent>();
-        lootDropNumber = Random.Range(1,10);
+        lootDropNumber = Random.Range(1,2);
     }
 
     // Update is called once per frame
