@@ -5,7 +5,8 @@ using UnityEngine.AI;
 public class ZombieMovement : MonoBehaviour
 {
     public List<GameObject> humans = new List<GameObject>();
-    public string[] animationNames = new string[3];
+    public string[] movingAnimation = new string[3];
+    public string[] deathAnimation = new string[2];
     public NavMeshAgent zombie;
     public Transform zombPos;
     public int zombieHealth;
@@ -20,7 +21,7 @@ public class ZombieMovement : MonoBehaviour
     {
       
         zAnim = GetComponent<Animator>();
-        zAnim.SetTrigger(animationNames[Random.Range(0,animationNames.Length)]);
+        zAnim.SetTrigger(movingAnimation[Random.Range(0, movingAnimation.Length)]);
         player = GameObject.FindWithTag("Player");
         if (player != null) 
         {

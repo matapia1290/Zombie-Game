@@ -130,11 +130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 215978773674676261, guid: 657ff0d18fa1e5049801d8f0d1ec0391,
-        type: 3}
-      propertyPath: m_Speed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2571926012234650010, guid: 657ff0d18fa1e5049801d8f0d1ec0391,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -340,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoText: {fileID: 1833466222}
-  pistolMagCount: 5
+  pistolMagCount: 10
   pistolMagMax: 16
   pistolReloadSpeed: 0.9
   rPressed: 0
@@ -796,14 +791,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406610241}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04a42f49231b10f4e9a20ab691ebea03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   zombies:
   - {fileID: 4381159318308432117, guid: 657ff0d18fa1e5049801d8f0d1ec0391, type: 3}
-  spawnTimer: 1
+  spawnTimer: 2
 --- !u!1 &1673785617
 GameObject:
   m_ObjectHideFlags: 0
