@@ -29,7 +29,7 @@ public class ZombieMovement : MonoBehaviour
             stats = player.GetComponent<PlayerStats>();
         }
         zombie = GetComponent<NavMeshAgent>();
-        lootDropNumber = Random.Range(1,10);
+        lootDropNumber = Random.Range(1,5);
     }
     IEnumerator DeathAnimation() 
     {

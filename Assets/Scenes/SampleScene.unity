@@ -798,7 +798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombies:
   - {fileID: 4381159318308432117, guid: 657ff0d18fa1e5049801d8f0d1ec0391, type: 3}
-  spawnTimer: 2
+  spawnTimer: 0.5
 --- !u!1 &1673785617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee1be345810c8247a5e8f1945dcadbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 50
+  playerHealth: 100
   playerPoints: 0
   player: {fileID: 622149659}
   spawner: {fileID: 1406610241}
