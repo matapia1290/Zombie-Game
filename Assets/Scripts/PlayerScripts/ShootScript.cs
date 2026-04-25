@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShootScript : MonoBehaviour
 {
+    //Melee
+    public float meleeRange;
     //Line render
     LineRenderer lineRenderer;
     //Ammo text to display on UI
@@ -29,6 +31,7 @@ public class ShootScript : MonoBehaviour
     void Update()
     {
         SemiAuto();
+        Melee();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -76,10 +79,36 @@ public class ShootScript : MonoBehaviour
             }
         }
     }
+
+    void Melee() 
+    {
+        if (Input.GetKeyDown(KeyCode.F)) 
+        {
+            Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+
+
+            if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, meleeRange))
+            {
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(0, Camera.main.transform.position + Camera.main.transform.forward + new Vector3(0, -0.3f, 0f));
+                lineRenderer.SetPosition(1, hit.point);
+
+                ZombieMovement enemy = hit.collider.GetComponent<ZombieMovement>();
+                if (enemy != null)
+                {
+                    Debug.Log("Melee'd: " + hit.collider.name);
+                    enemy.zombieHealth--;
+
+                }
+            }
+        }
+       
+    }
     void Shoot()
     {
         // Calculate the center of the camera viewport
-        Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        Vector3 rayOrigin = Camera.main.transform.position;
         RaycastHit hit;
 
         // Perform the raycast
@@ -93,7 +122,7 @@ public class ShootScript : MonoBehaviour
             ZombieMovement enemy = hit.collider.GetComponent<ZombieMovement>();
             if (enemy != null)
             {
-                Debug.Log("Hit: " + hit.collider.name);
+                Debug.Log("Shot: " + hit.collider.name);
                 enemy.zombieHealth--;
                
             }
