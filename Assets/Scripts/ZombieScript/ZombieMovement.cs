@@ -14,12 +14,13 @@ public class ZombieMovement : MonoBehaviour
     public GameObject healthPack, AmmoPack;
     private GameObject player;
     private Animator zAnim;
+    private MeshCollider MeshCollider;
     // public Transform player;
     bool dead = false;
     PlayerStats stats;
     void Start()
     {
-      
+      MeshCollider = GetComponent<MeshCollider>();
         zAnim = GetComponent<Animator>();
         zAnim.SetTrigger(movingAnimation[Random.Range(0, movingAnimation.Length)]);
         player = GameObject.FindWithTag("Player");
@@ -29,24 +30,16 @@ public class ZombieMovement : MonoBehaviour
             stats = player.GetComponent<PlayerStats>();
         }
         zombie = GetComponent<NavMeshAgent>();
-        lootDropNumber = Random.Range(1,5);
+        lootDropNumber = Random.Range(1,2);
     }
     IEnumerator DeathAnimation() 
     {
             zombie.enabled = false;
+            MeshCollider.enabled = false;
             zAnim.SetTrigger("Dying");
             yield return new WaitForSeconds(3.3f);
             Destroy(gameObject);
-            switch (lootDropNumber)
-            {
-                case 1:
-                    Instantiate(healthPack, transform.position + Vector3.up * 3, transform.rotation);
-                    break;
-                case 2:
-                    Instantiate(AmmoPack, transform.position + Vector3.up * 3, transform.rotation);
-                    break;
-            }
-            stats.playerPoints++;
+            
         
     }
     // Update is called once per frame
@@ -58,6 +51,16 @@ public class ZombieMovement : MonoBehaviour
         RemoveNull();
         if (1  > zombieHealth) 
         {
+            switch (lootDropNumber)
+            {
+                case 1:
+                    Instantiate(healthPack, transform.position + Vector3.up * 2 , transform.rotation);
+                    break;
+                case 2:
+                    Instantiate(AmmoPack, transform.position + Vector3.up * 2, transform.rotation);
+                    break;
+            }
+            stats.playerPoints++;
             dead = true;
             StartCoroutine(DeathAnimation());
         }
@@ -89,5 +92,5 @@ public class ZombieMovement : MonoBehaviour
 
         }
     }
-
+    
 }

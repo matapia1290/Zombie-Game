@@ -17,7 +17,6 @@ public class PlayerStats : MonoBehaviour
     MovementScript move;
     ShootScript shoot;
     MouseMovement mouse;
-    ZombieSpawner zombSpawner;
     public Camera mainCamera;
     Rigidbody rb;
     void Start()
@@ -40,7 +39,6 @@ public class PlayerStats : MonoBehaviour
             move.enabled = false;
             shoot.enabled = false;
             mouse.enabled = false;
-            zombSpawner.enabled = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         playerStamina = Mathf.FloorToInt(move.staminaMeter);
