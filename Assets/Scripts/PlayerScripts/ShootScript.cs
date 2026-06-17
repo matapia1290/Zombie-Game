@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShootScript : MonoBehaviour
 {
+    public WeaponDetails weaponDetails;
+    Transform weaponSpot;
+    GameObject weaponSpawned;
+    public Vector3 weaponOffset;
     //Melee
     public float meleeRange;
     //Line render
@@ -22,6 +26,7 @@ public class ShootScript : MonoBehaviour
     public float timer = 0;
     void Start()
     {
+        weaponSpawned = Instantiate(weaponDetails.weaponPrefab);
         lineRenderer = GetComponent<LineRenderer>();
         
         pistolMag = pistolMagMax;
@@ -30,6 +35,7 @@ public class ShootScript : MonoBehaviour
     }
     void Update()
     {
+        WeaponSlot();
         SemiAuto();
         Melee();
     }
@@ -38,6 +44,19 @@ public class ShootScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Ammo"))
         {
             pistolAmmo += pistolMagMax;
+        }
+    }
+    void WeaponSlot() 
+    {
+        {
+            // position
+            weaponSpawned.transform.position = Camera.main.transform.position
+                                             + Camera.main.transform.forward * weaponOffset.z
+                                             + Camera.main.transform.right * weaponOffset.x
+                                             + Camera.main.transform.up * weaponOffset.y;
+
+            // rotation matches camera
+            weaponSpawned.transform.rotation = Camera.main.transform.rotation * Quaternion.Euler(0, 90, 0);
         }
     }
     void SemiAuto()
