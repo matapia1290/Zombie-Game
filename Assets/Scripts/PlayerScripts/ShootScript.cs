@@ -49,14 +49,18 @@ public class ShootScript : MonoBehaviour
     void WeaponSlot() 
     {
         {
-            // position
-            weaponSpawned.transform.position = Camera.main.transform.position
-                                             + Camera.main.transform.forward * weaponOffset.z
-                                             + Camera.main.transform.right * weaponOffset.x
-                                             + Camera.main.transform.up * weaponOffset.y;
+            if (weaponDetails.isMelee) 
+            {
+                weaponSpawned.transform.position = Camera.main.transform.position
+                                            + Camera.main.transform.forward * weaponOffset.z
+                                            + Camera.main.transform.right * weaponOffset.x
+                                            + Camera.main.transform.up * weaponOffset.y;
+                weaponSpawned.transform.rotation = Camera.main.transform.rotation * Quaternion.Euler(-22, 90,0);
+            }
+            
+           
 
-            // rotation matches camera
-            weaponSpawned.transform.rotation = Camera.main.transform.rotation * Quaternion.Euler(0, 90, 0);
+            
         }
     }
     void SemiAuto()
@@ -106,7 +110,7 @@ public class ShootScript : MonoBehaviour
             Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
 
-
+            StartCoroutine(MeleeSwing());
             if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, meleeRange))
             {
                 lineRenderer.enabled = true;
@@ -147,7 +151,13 @@ public class ShootScript : MonoBehaviour
             }
         }
     }
+    IEnumerator MeleeSwing() 
+    {
 
+        weaponSpawned.transform.rotation = Camera.main.transform.rotation * Quaternion.Euler(-22, 90,30);
+        weaponSpawned.transform.position = Vector3.Lerp(weaponSpawned.transform.position, weaponSpawned.transform.forward * 4, Time.deltaTime);
+       yield return new WaitForFixedUpdate();
+    }
     IEnumerator LineSpawner() 
     {
        

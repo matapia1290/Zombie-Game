@@ -10,5 +10,6 @@ public class WeaponDetails :ScriptableObject
     public string weaponName;
     public string weaponType;
     public bool isFirearm;
+    public bool isMelee;
 
 }
